@@ -57,7 +57,7 @@ for i in list:
     x = requests.get(url)
     if(x.status_code == 200):
         check + 1
-        print("[+] I've found a WP dir: " + url + " [+]")
+        print("[+] I've found a WP dir: " + url + " [+]\n")
     else:
         print("[!] I've received the following code: " + str(x.status_code) + " and the URL was: " + url + " [!]\n")
 
