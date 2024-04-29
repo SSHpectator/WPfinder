@@ -49,7 +49,7 @@ list = [
    "/wp-json/wp/v2/comments",
 ]
 
-url = input("Inserisci un URL valido. \n")
+url = input("[+] INSERT A VALID URL [+]\n")
 check = 0
 
 for i in list:
@@ -60,4 +60,4 @@ for i in list:
         print(x.url)
 
 if(check == 0):
-    print("Nessuna directory WP trovata. :(\n")
+    print("[+]I DIDN'T FIND ANY WP DIRECTORY FOR YOU :( [+]\n")
