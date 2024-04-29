@@ -49,9 +49,7 @@ def WPdir(url):
        "/wp-json/wp/v2/comments",
     ]
     
-    url = input("[+] INSERT A VALID URL [+]\n")
     check = 0
-
     tmp = url
     
     for i in list:
