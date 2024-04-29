@@ -58,6 +58,8 @@ for i in list:
     if(x.status_code == 200):
         check + 1
         print(x.url)
+    else:
+        print("[!] I've received the following code: " + str(x.status_code) + " and the URL was: " + url + " [!]\n")
 
 if(check == 0):
     print("[+]I DIDN'T FIND ANY WP DIRECTORY FOR YOU :( [+]\n")
