@@ -51,6 +51,8 @@ def WPdir(url):
     
     url = input("[+] INSERT A VALID URL [+]\n")
     check = 0
+
+    tmp = url
     
     for i in list:
         url += i
@@ -61,6 +63,7 @@ def WPdir(url):
             print("[+] I've found a WP dir: " + url + " [+]\n")
         else:
             print("[!] I've received the following code: " + str(x.status_code) + " and the URL was: " + url + " [!]\n")
+        url = tmp
     
     if(check == 0):
         print("[+]I DIDN'T FIND ANY WP DIRECTORY FOR YOU :( [+]\n")
