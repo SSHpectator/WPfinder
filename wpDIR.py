@@ -30,7 +30,7 @@ def WPdir(url):
     check = 0
 
     for directory in directories:
-        test_url = url + "/" + directory
+        test_url = url + directory
         check_waf(test_url)
         try:
             response = requests.get(test_url)
