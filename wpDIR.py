@@ -1,70 +1,49 @@
 import requests
 
 def WPdir(url):
-    list = [
-    "wp-admin.php",
-    
-     "wp-config.php",
-    
-     "wp-content/uploads",
-    
-     "Wp-load",
-    
-     "wp-signup.php",
-    
-     "Wp-JSON",
-    
-     "wp-includes [directory]",
-    
-     "index.php",
-    
-     "wp-login.php",
-    
-     "wp-links-opml.php",
-    
-     "wp-activate.php",
-    
-     "wp-blog-header.php",
-    
-     "wp-cron.php",
-    
-     "wp-links.php",
-    
-     "wp-mail.php",
-    
-     "xmlrpc.php",
-    
-     "wp-settings.php",
-    
-     "wp-trackback.php",
-    
-     "Wp-signup.php",
-    
-     "/wp-json/wp/v2/users",
-    
-     "/wp-json/wp/v2/plugins",
-    
-     "/wp-json/wp/v2/themes",
-    
-       "/wp-json/wp/v2/comments",
+    directories = [
+        "wp-admin.php",
+        "wp-config.php",
+        "wp-content/uploads",
+        "wp-load",
+        "wp-signup.php",
+        "wp-JSON",
+        "wp-includes",
+        "index.php",
+        "wp-login.php",
+        "wp-links-opml.php",
+        "wp-activate.php",
+        "wp-blog-header.php",
+        "wp-cron.php",
+        "wp-links.php",
+        "wp-mail.php",
+        "xmlrpc.php",
+        "wp-settings.php",
+        "wp-trackback.php",
+        "wp-signup.php",
+        "/wp-json/wp/v2/users",
+        "/wp-json/wp/v2/plugins",
+        "/wp-json/wp/v2/themes",
+        "/wp-json/wp/v2/comments"
     ]
-    
+
     check = 0
-    tmp = url
-    
-    for i in list:
-        url += i
-        check_waf(url)
-        x = requests.get(url)
-        if(x.status_code == 200):
-            check + 1
-            print("[+] I've found a WP dir: " + url + " [+]\n")
-        else:
-            print("[!] I've received the following code: " + str(x.status_code) + " and the URL was: " + url + " [!]\n")
-        url = tmp
-    
-    if(check == 0):
-        print("[+]I DIDN'T FIND ANY WP DIRECTORY FOR YOU :( [+]\n")
+
+    for directory in directories:
+        test_url = url + "/" + directory
+        check_waf(test_url)
+        try:
+            response = requests.get(test_url)
+            if response.status_code == 200:
+                check += 1
+                print("[+] Found accessible WP directory: " + test_url + " [+]\n")
+            else:
+                print("[!] Received status code: " + str(response.status_code) + " for URL: " + test_url + " [!]\n")
+        except requests.exceptions.RequestException as e:
+            print("[!] Error occurred while accessing URL: " + test_url + " - " + str(e) + " [!]\n")
+
+    if check == 0:
+        print("No WP directories found. :(\n")
 
 def check_waf(url):
     headers = {
@@ -74,12 +53,12 @@ def check_waf(url):
     response = requests.get(url, headers=headers)
 
     if response.status_code == 403:
-        print("[!] Possible presence of WAF, the request has been blocked. [!]\n")
+        print("[!] Possibly a WAF is present, the request was blocked. [!]\n")
     elif response.status_code == 200:
-        print("[!] No presence of WAF. [!]\n")
+        print("[!] No signs of WAF. [!]\n")
     else:
-        print("[!] It was not possible to determine if there is a WAF or not. [!]\n")
+        print("[!] Unable to determine if a WAF is present. [!]\n")
 
 if __name__ == "__main__":
-    url = input("[+] Insert a valid URL [+]\n")
+    url = input("[+] Enter a valid URL [+]\n")
     WPdir(url)
