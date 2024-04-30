@@ -1,4 +1,6 @@
+import argparse
 import requests
+from bs4 import BeautifulSoup
 
 def WPdir(url):
     directories = [
@@ -28,7 +30,6 @@ def WPdir(url):
     ]
 
     check = 0
-
     for directory in directories:
         test_url = url + directory
         check_waf(test_url)
@@ -59,6 +60,30 @@ def check_waf(url):
     else:
         print("[!] Unable to determine if a WAF is present. [!]\n")
 
+def check_wordpress(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    if soup.find('meta', attrs={'name': 'generator', 'content': 'WordPress'}) is not None:
+        return True
+
+    if soup.find('link', attrs={'rel': 'stylesheet', 'href': '/wp-content/'}) is not None:
+        return True
+
+    if soup.find('script', attrs={'src': '/wp-includes/js/wp-embed.min.js'}) is not None:
+        return True
+
+    # If none of the above conditions match, it is likely not a WordPress site
+    return False
+
+
 if __name__ == "__main__":
-    url = input("[+] Enter a valid URL [+]\n")
-    WPdir(url)
+   url = input("[+] Enter a valid URL [+]\n")
+   # parser = argparse.ArgumentParser(description="Descrizione")
+   # parser.add_argument('argomento1', help='Descrizione argomento1')
+   # parser.add_argument('--opzione', help='Descrizione opzionale', action='store_true')
+   # args = parser.parse_args()
+   if(check_wordpress(url)):
+        WPdir(url)
+   else:
+       print("[-] This website is not a WordPress website ! [-]\n")
