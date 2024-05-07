@@ -8,4 +8,6 @@ BUY ME A COFFE
 
 https://buymeacoffee.com/dalta
 
+![bmc_qr](https://github.com/simonedaltardi/WPfinder/assets/39882187/5c7d67ce-dd36-43b7-b08a-b6e9944a0749)
+
 #############################################################
