@@ -20,10 +20,10 @@ def check_wordpress(url):
             else:
                 return False
         else:
-            print(tcolor.red + "Errore durante il recupero del sito. Codice di stato:", response.status_code + tcolor.end)
+            print(tcolor.red + "[-]Error during the retrieving of the site. Status code:", response.status_code + tcolor.end)
             return False
     except requests.RequestException as e:
-        print(tcolor.red + "Errore durante la richiesta HTTP:", e + tcolor.end)
+        print(tcolor.red + "[-]Error during the HTTP request:", e + tcolor.end)
         return False
 
 def check_waf(url):
