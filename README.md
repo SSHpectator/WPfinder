@@ -3,3 +3,5 @@ WPfinder checks if a website is made with Wordpress, if it is present a WAF and 
 [+] DO NOT USE THIS TOOL FOR ILLEGAL USE. THIS TOOL IS USEFUL FOR BUG BOUNTY HUNTERS AND TO WEB RESEARCHERS. I ASSUME NO RESPONSIBILITY FOR INCORRECT USE OF THIS TOOL. [+]
 
 #################################################################
+INSTALL
+git clone https://github.com/DaltaBug/WPfinder/
