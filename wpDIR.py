@@ -68,9 +68,9 @@ def WPdir(url):
     ]
 
     check = 0
+    check_waf(test_url)
     for directory in directories:
         test_url = url.rstrip('/') + '/' + directory
-        check_waf(test_url)
         try:
             response = requests.get(test_url)
             if response.status_code == 200:
