@@ -4,4 +4,4 @@ WPfinder checks if a website is made with Wordpress, if it is present a WAF and 
 
 #################################################################
 INSTALL
-git clone https://github.com/DaltaBug/WPfinder/
+git clone https://github.com/SSHpectator/WPfinder/
